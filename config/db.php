@@ -1,12 +1,13 @@
 <?php
 $host = 'localhost';
-$db = 'gestion_stock';
-$user = 'kinza';
-$pass = '123'; // Mot de passe de phpMyAdmin
+$db = 'gestion_systeme';
+$user = 'root';
+$pass = 'malik123'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+    echo("done");
 } catch (PDOException $e) {
-    die("Erreur connexion DB : " . $e->getMessage());
+    echo("Erreur connexion DB : " . $e->getMessage());
 }
 ?>
