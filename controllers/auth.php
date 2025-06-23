@@ -17,13 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $user['matricule'];
         if ($pdo->query("SELECT * FROM Administrateurs WHERE id_admin = $id")->fetch()) {
             $_SESSION['role'] = 'admin';
-            header("Location: ../views/dashboard_admin.php");
+            header("Location: ../views/dashboard_admin.html");
         } elseif ($pdo->query("SELECT * FROM Agents WHERE id_agent = $id")->fetch()) {
             $_SESSION['role'] = 'agent';
-            header("Location: ../views/dashboard_agent.php");
+            header("Location: ../views/dashboard_agent.html");
         } else {
             $_SESSION['role'] = 'utilisateur';
-            header("Location: ../views/dashboard_user.php");
+            header("Location: ../views/dashboard_user.html");
         }
 
     } else {
