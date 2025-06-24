@@ -50,3 +50,12 @@ CREATE TABLE Demandes (
     FOREIGN KEY (utilisateur_id) REFERENCES Utilisateurs(matricule) ON DELETE CASCADE
 );
 
+-- Attribut manquant
+-- Add 'nom' column to 'Produits' table
+ALTER TABLE Produits
+ADD nom VARCHAR(100);
+
+-- Add 'idProduit' column to 'Demandes' table
+ALTER TABLE Demandes
+ADD idProduit INT,
+ADD FOREIGN KEY (idProduit) REFERENCES Produits(idP) ON DELETE CASCADE;

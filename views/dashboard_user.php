@@ -270,7 +270,7 @@
   <aside class="sidebar">
     <div class="logo">
       <i class="fas fa-warehouse"></i>
-      <h1>StockPro</h1>
+      <h1>Gestion Stock</h1>
     </div>
 
     <nav class="nav-links">
@@ -287,32 +287,50 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Top Bar -->
-    <div class="top-bar">
-      <div class="search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Rechercher un produit, fournisseur..." />
-      </div>
-
-      <div class="user-actions">
-        <div class="notification">
-          <i class="fas fa-bell"></i>
-          <span class="notification-badge">3</span>
-        </div>
-        <div class="user-profile">
-          <div class="user-avatar">JD</div>
-          <div class="user-info">
-            <div class="user-name">John Doe</div>
-            <div class="user-role">Gestionnaire</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Dashboard Title -->
     <div class="dashboard-title">
       <h2>Tableau de bord utilisateur</h2>
     </div>
+    <!-- Formulaire de création de demande -->
+    <div class="form-container" style="margin-top: 20px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); max-width: 600px;">
+      <h3 style="margin-bottom: 20px; color: var(--primary); font-size: 22px;">Créer une nouvelle demande</h3>
+      <form action="../controllers/demandes.php" method="post">
+        <div style="margin-bottom: 25px;">
+          <label for="idProduit" style="display: block; font-weight: 600; margin-bottom: 8px;">Nom du produit :</label>
+          <select id="idProduit" name="idProduit" required
+            style="width: 100%; padding: 10px 15px; border: 2px solid var(--light-gray); border-radius: 8px; font-size: 15px;">
+            <option value="">-- Sélectionnez un produit --</option>
+            <?php
+            require_once '../config/db.php'; // this file must define $pdo
+                    
+            try {
+                $stmt = $pdo->query("SELECT idP, nom FROM Produits");
+            
+                if ($stmt->rowCount() === 0) {
+                    echo '<option disabled>Aucun produit disponible</option>';
+                } else {
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<option value="' . $row['idP'] . '">' . htmlspecialchars($row['nom']) . '</option>';
+                    }
+                }
+            } catch (PDOException $e) {
+                echo '<option disabled>Erreur : ' . htmlspecialchars($e->getMessage()) . '</option>';
+            }
+            ?>
+          </select>
+
+        </div>
+        <div style="margin-bottom: 20px;">
+          <label for="quantite" style="display: block; font-weight: 600; margin-bottom: 8px;">Quantité :</label>
+          <input type="number" id="quantite" name="quantite" required
+            style="width: 100%; padding: 10px 15px; border: 2px solid var(--light-gray); border-radius: 8px; font-size: 15px;" />
+        </div>
+      
+        <input type="submit" value="Envoyer la demande"
+          style="padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;" />
+      </form>
+    </div>
+
   </main>
 </body>
 </html>

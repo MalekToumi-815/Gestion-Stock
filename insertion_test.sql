@@ -10,3 +10,6 @@ INSERT INTO Administrateurs (id_admin)
 VALUES (1);
 INSERT INTO Utilisateurs (nom, prenom, login, mdp)
 VALUES ('Ben Ali', 'Sami', 'sami_user', 'user123');
+
+INSERT INTO Produits (nom, quantite, designation)
+VALUES ('Clavier mécanique', 50, 'Clavier rétroéclairé avec switches rouges');

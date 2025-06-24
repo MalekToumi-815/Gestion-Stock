@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && $mdp === $user['mdp']) {
         $_SESSION['user'] = $user;
 
-        // Vérification rôle
+        // Vérification rôle0
         $id = $user['matricule'];
         if ($pdo->query("SELECT * FROM Administrateurs WHERE id_admin = $id")->fetch()) {
             $_SESSION['role'] = 'admin';
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../views/dashboard_agent.html");
         } else {
             $_SESSION['role'] = 'utilisateur';
-            header("Location: ../views/dashboard_user.html");
+            header("Location: ../views/dashboard_user.php");
         }
 
     } else {
